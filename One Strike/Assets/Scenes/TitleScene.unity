@@ -301,6 +301,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d62656e573056947a9c2fa35541b9e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
+  plr1: {fileID: 0}
+  plr2: {fileID: 0}
   clips: []
   strikeCanvas: {fileID: 0}
   winCanvas: {fileID: 0}
@@ -2466,6 +2469,16 @@ PrefabInstance:
     - target: {fileID: 2415637940839736234, guid: 3fb147e714ec27942a19adc14703e562,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415637940603178123, guid: 3fb147e714ec27942a19adc14703e562,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415637941080166857, guid: 3fb147e714ec27942a19adc14703e562,
+        type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

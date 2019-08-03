@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class StarsScroll : MonoBehaviour
 {
-    float scrollSpeed = 0.01f;
+    [SerializeField]float scrollSpeed = 0.01f;
+    [SerializeField]bool reverse = false;
 
 
 
     // Start is called before the first frame update
     void Update()
     {
-        transform.position -= new Vector3(scrollSpeed * Time.deltaTime, 0, 0);
+        if (!reverse)
+        {
+            transform.position -= new Vector3(scrollSpeed * Time.deltaTime, 0, 0);
+        }
+        else if (reverse)
+        {
+            transform.position += new Vector3(scrollSpeed * Time.deltaTime, 0, 0);
+        }
     }
     
 }

@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    float timer;
+    public float timer;
     AudioSource audioSource;
     AudioClip otherClip;
     bool isPaused = false;
+    [SerializeField] CharacterAnims plr1;
+    [SerializeField] CharacterAnims plr2;
 
     [SerializeField] AudioClip[] clips;
     [SerializeField] GameObject strikeCanvas;
@@ -23,13 +25,14 @@ public class GameManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         strikeCanvas.SetActive(false);
         timer = Random.Range(10, 30);
+        plr1.SetTimer(timer);
+        plr2.SetTimer(timer);
     }
     // Start is called before the first frame update
     void Start()
     {
         audioSource.PlayOneShot(clips[0]);
         Countdown();
-
     }
 
     // Update is called once per frame
@@ -119,11 +122,15 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Failed");
             strikeCanvas.SetActive(false);
+            yield return new WaitForSeconds(3);
+            CharacterAnims.win = false;
             loseCanvas.SetActive(true);
             yield break;
         }
         Debug.Log("Won");
         strikeCanvas.SetActive(false);
+        yield return new WaitForSeconds(3);
+        CharacterAnims.win = true;
         winCanvas.SetActive(true);
     }
 

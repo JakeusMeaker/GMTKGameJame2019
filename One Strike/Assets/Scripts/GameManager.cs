@@ -9,11 +9,13 @@ public class GameManager : MonoBehaviour
     float timer;
     AudioSource audioSource;
     AudioClip otherClip;
+    bool isPaused = false;
 
     [SerializeField] AudioClip[] clips;
     [SerializeField] GameObject strikeCanvas;
     [SerializeField] GameObject winCanvas;
     [SerializeField] GameObject loseCanvas;
+    [SerializeField] GameObject pauseCanvas;
     [SerializeField] Text countdownText;
 
     private void Awake()
@@ -35,11 +37,37 @@ public class GameManager : MonoBehaviour
     {
         countdownText.text = timer.ToString();
         timer -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
+        {
+            Pause();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape) && isPaused)
+        {
+           Unpause();
+        }
     }
+
+    void Pause()
+    {
+        isPaused = true;
+        Debug.Log("Paused");
+        Time.timeScale = 0;
+        pauseCanvas.SetActive(true);
+    }
+
+    void Unpause()
+    {
+        Debug.Log("Un-Paused");
+        Time.timeScale = 1;
+        pauseCanvas.SetActive(false);
+        isPaused = false;
+    }
+
 
     public void StartGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(1);
     }
 
     public void Restart()

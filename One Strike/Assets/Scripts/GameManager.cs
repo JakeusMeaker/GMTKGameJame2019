@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject loseCanvas;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] Text countdownText;
-
+    
     private void Awake()
-    {
+    { 
         audioSource = GetComponent<AudioSource>();
         strikeCanvas.SetActive(false);
         timer = Random.Range(10, 30);
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         audioSource.PlayOneShot(clips[0]);
         Countdown();
-        
+
     }
 
     // Update is called once per frame
@@ -41,16 +41,18 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
         {
             Pause();
+            isPaused = !isPaused;
         }
-        if(Input.GetKeyDown(KeyCode.Escape) && isPaused)
+        else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
         {
-           Unpause();
+            Unpause();
+            isPaused = !isPaused;
         }
+
     }
 
     void Pause()
     {
-        isPaused = true;
         Debug.Log("Paused");
         Time.timeScale = 0;
         pauseCanvas.SetActive(true);
@@ -60,8 +62,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Un-Paused");
         Time.timeScale = 1;
-        pauseCanvas.SetActive(false);
-        isPaused = false;
+        pauseCanvas.SetActive(false);       
     }
 
 
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
         audioSource.PlayOneShot(clips[4]);
         SceneManager.LoadSceneAsync(1);
     }
-    
+
     public void MainMenu()
     {
         SceneManager.LoadSceneAsync(0);
@@ -87,7 +88,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Countdown()
-    {         
+    {
         Invoke("Strike", timer);
     }
 
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
         strikeCanvas.SetActive(true);
         StartCoroutine(CheckPress());
         audioSource.Stop();
+        audioSource.PlayOneShot(clips[5]);
         audioSource.PlayOneShot(clips[1]);
         audioSource.PlayOneShot(clips[2]);
         otherClip = clips[3];
@@ -107,13 +109,13 @@ public class GameManager : MonoBehaviour
     {
         float timer = 0.4f;
         bool success = false;
-        while(success == false && timer > 0f)
+        while (success == false && timer > 0f)
         {
             timer -= Time.deltaTime;
             success = Input.GetKeyDown(KeyCode.Space);
             yield return null;
         }
-        if(success == false)
+        if (success == false)
         {
             Debug.Log("Failed");
             strikeCanvas.SetActive(false);
@@ -125,5 +127,4 @@ public class GameManager : MonoBehaviour
         winCanvas.SetActive(true);
     }
 
-   
 }

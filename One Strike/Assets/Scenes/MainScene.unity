@@ -1338,6 +1338,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 55e034b1e8584114d8ff777e9d81672e, type: 3}
   - {fileID: 8300000, guid: 8ed321949891beb44821386500571ad3, type: 3}
   - {fileID: 8300000, guid: e06d22958e3c7d740a766f6b381eb771, type: 3}
+  - {fileID: 8300000, guid: 462eab71999722b40964e2f5d268e02f, type: 3}
   strikeCanvas: {fileID: 570083378}
   winCanvas: {fileID: 446737401}
   loseCanvas: {fileID: 1713976254}
@@ -2231,7 +2232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1456316193
 MonoBehaviour:
   m_ObjectHideFlags: 0

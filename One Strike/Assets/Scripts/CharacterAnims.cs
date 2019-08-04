@@ -40,7 +40,7 @@ public class CharacterAnims : MonoBehaviour
         yield return new WaitForSeconds(newTimer - 3f);
 
         sRenderer.sprite = sprites[(int)Sprites.Attacking];
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         if (!win)
         {

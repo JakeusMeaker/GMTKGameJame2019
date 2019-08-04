@@ -12,16 +12,15 @@ public class GameManager : MonoBehaviour
     bool isPaused = false;
     [SerializeField] CharacterAnims plr1;
     [SerializeField] CharacterAnims plr2;
-
     [SerializeField] AudioClip[] clips;
     [SerializeField] GameObject strikeCanvas;
     [SerializeField] GameObject winCanvas;
     [SerializeField] GameObject loseCanvas;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] Text countdownText;
-    
+
     private void Awake()
-    { 
+    {
         audioSource = GetComponent<AudioSource>();
         strikeCanvas.SetActive(false);
         timer = Random.Range(10, 30);
@@ -65,7 +64,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Un-Paused");
         Time.timeScale = 1;
-        pauseCanvas.SetActive(false);       
+        pauseCanvas.SetActive(false);
     }
 
 
@@ -110,28 +109,31 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CheckPress()
     {
-        float timer = 0.4f;
+        float difficulty = 0.25f;
         bool success = false;
-        while (success == false && timer > 0f)
+        while (success == false && difficulty > 0f)
         {
-            timer -= Time.deltaTime;
+            difficulty -= Time.deltaTime;
             success = Input.GetKeyDown(KeyCode.Space);
             yield return null;
         }
         if (success == false)
-        {
+        {            
             Debug.Log("Failed");
             strikeCanvas.SetActive(false);
-            yield return new WaitForSeconds(3);
             CharacterAnims.win = false;
+            yield return new WaitForSeconds(3);
             loseCanvas.SetActive(true);
             yield break;
         }
-        Debug.Log("Won");
-        strikeCanvas.SetActive(false);
-        yield return new WaitForSeconds(3);
-        CharacterAnims.win = true;
-        winCanvas.SetActive(true);
+        else if (success)
+        {            
+            Debug.Log("Won");
+            strikeCanvas.SetActive(false);
+            CharacterAnims.win = true;
+            yield return new WaitForSeconds(3);
+            winCanvas.SetActive(true);
+        }
     }
 
 }
